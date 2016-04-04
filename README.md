@@ -24,6 +24,13 @@ The plugin requires
 * Put an audio called `audio_example.mp4` in `example/assets/audio` directory
 * Open `index.html` file in `example` directory.
 
+## Screen
+* Inline directive in light theme
+![Alt text](/screen/image1.png "Inline directive in light theme")
+
+* Panel of media open
+![Alt text](/screen/image2.png "Panel of media open")
+
 ## Bug, questions, contributions?
 
 
