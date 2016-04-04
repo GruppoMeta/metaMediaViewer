@@ -34,8 +34,10 @@
         // inizializzo una variabile che referenzia il modulo
         var vm = this;
         var render = function(){
-            vm.setMedia(1);  
+            $element.find(".body img").on("load",$scope.setInitZoom);
+            vm.setMedia(1); 
         };
+        var timestamp = new Date().getTime();
         vm.modalMode = vm.options.modal;
         vm.contentHeight = !vm.modalMode && vm.options.height;
         vm.pdfjsViewer = {
@@ -74,13 +76,45 @@
                 vm.videogular.config.sources.push(source);
             }
             else {
-                vm.media.url = vm.media.url + "?timestamp=" + new Date().getTime();
+                vm.media.url = vm.media.url.indexOf("?timestamp=" + timestamp) === -1 ? vm.media.url + "?timestamp=" + timestamp : vm.media.url;
+                $element.find(".body img").off().on("load",$scope.setInitZoom);
             }
             vm.prev = vm.currentMedia>1 ? true : false;
             vm.next = vm.currentMedia<(vm.medias.length) ? true : false;
         };
+        vm.setZoom = null;
+        $scope.setInitZoom = function(ev){
+            var zoomWidth = null;
+            var zoomHeight = null;
+            var widthBody = $element.find('.body').width();
+            var heightBody = $element.find('.body').height();
+            var widthImg = $element.find('.body img').width();
+            var heightImg = $element.find('.body img').height();
+            if(widthImg>widthBody){
+                zoomWidth = widthBody/widthImg;
+            }
+            if(heightImg>heightBody){
+                zoomHeight = heightBody/heightImg;
+            }
+            if(zoomWidth && zoomHeight){
+                vm.setZoom = zoomWidth<=zoomHeight ? zoomWidth : zoomHeight;
+            }
+            else{
+                vm.setZoom = zoomWidth || zoomHeight || 1;
+            }
+            $element.find('.body img').css("zoom",vm.setZoom);
+            $element.find(".body img").off("load");
+        };
+        vm.zoomIn = function(){
+            vm.setZoom+=0.2;
+            $element.find('.body img').css("zoom",vm.setZoom);
+        };
+        vm.zoomOut = function(){
+            vm.setZoom-=0.2;
+            $element.find('.body img').css("zoom",vm.setZoom);
+        };
         $scope.$watch("metaMediaViewer.currentMedia",function(newVal,oldVal){
-            if(newVal){
+            if(newVal && newVal!==oldVal){
                 vm.setMedia(newVal);
             } 
         });
