@@ -1,0 +1,275 @@
+<!doctype html>
+<html ng-app="metaMediaViewerApp">
+    <head>
+        <meta charset="utf-8">
+        <title>metaMediaViewer - Visualize multimedia elements</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="bower_components/pdf.js-viewer/viewer.css">
+        <link rel="stylesheet" href="bower_components/videogular-themes-default/videogular.css" />
+
+        <link rel="stylesheet" href="dist/metaMediaViewer.css" />
+
+        <link rel="stylesheet" href="example/app.css" />
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="bower_components/pdf.js-viewer/pdf.js"></script>
+        <script src="bower_components/angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js"></script>
+        <script src="bower_components/videogular/videogular.js"></script>
+        <script src="bower_components/videogular-buffering/vg-buffering.js"></script>
+        <script src="bower_components/videogular-controls/vg-controls.js"></script>
+        <script src="bower_components/videogular-overlay-play/vg-overlay-play.js"></script>
+        <script src="bower_components/videogular-poster/vg-poster.js"></script>
+
+        <script src="dist/metaMediaViewer.js"></script>
+
+        <script type="text/javascript" src="example/app.js"></script>
+    </head>
+    <body>
+        <div class="container" ng-controller="appCtrl as vm">
+            <div ng-if="vm.listMediaModal">
+                <meta-media-viewer medias="vm.listMediaModal.medias" options="vm.listMediaModal.options"></meta-media-viewer>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="jumbotron">
+                        <div class="page-header">
+                            <h2>metaMediaViewer - <small>Visualize multimedia elements.</small></h2>
+                        </div>
+                        <h4>A simple component for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf.</h4>
+                        <a class="btn btn-primary" href="https://github.com/GruppoMeta/metaMediaViewer">View on Github</a>
+                        <a class="btn btn-primary" href="https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip">Download zip</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>Use it like an inline directive...</h3>
+                    <meta-media-viewer medias="vm.listMedia.medias" options="vm.listMedia.options"></meta-media-viewer>
+                    <figure class="highlight">
+                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div ng-controller="appCtrl as vm">
+    &lt;meta-media-viewer medias="vm.listMedia.medias" options="vm.listMedia.options">&lt;/meta-media-viewer>
+&lt;/div>
+&lt;script type="text/javascript">
+    angular.module('metaMediaViewerApp',['metaMediaViewerMdl'])
+    .controller('appCtrl', appCtrl);
+
+    function appCtrl(){
+        var vm = this;
+        var medias = [
+            {
+                "thumbnail":"./assets/images/picasso_thumbnail.jpeg",
+                "title":"Picasso's picture",
+                "type":"IMAGE",
+                "url":"./assets/images/picasso.jpeg"
+            },
+            {
+                "thumbnail":"./assets/images/dama_thumbnail.jpeg",
+                "title":"La dama con l'ermellino",
+                "type":"IMAGE",
+                "url":"./assets/images/dama.jpeg"
+            }
+            /*continue for all media you want to add ...*/
+        ];
+        vm.listMedia = {
+            "medias": medias,
+            "options": {
+                btnClose: false,
+                theme:"light"
+            }
+        };
+    }
+&lt;/script></span></code></pre>
+                    </figure>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h3>... or open it in modal mode</h3>
+                    <div class="btn btn-primary" ng-click="vm.openViewerModal()">Open Viewer</div>
+                    <figure class="highlight">
+                        <pre><code class="language-html" data-lang="html"><span class="nt">&lt;div ng-controller="appCtrl as vm">
+    &lt;div ng-if="vm.listMediaModal">
+        &lt;meta-media-viewer medias="vm.listMedia.medias" options="vm.listMedia.options">&lt;/meta-media-viewer>
+    &lt;/div>
+    &lt;div class="btn btn-primary" ng-click="vm.openViewerModal()">Open Viewer&lt;/div>
+&lt;/div>
+&lt;script type="text/javascript">
+    angular.module('metaMediaViewerApp',['metaMediaViewerMdl'])
+    .controller('appCtrl', appCtrl);
+
+    function appCtrl(){
+        var vm = this;
+        var medias = [
+            {
+                "thumbnail":"./assets/images/picasso_thumbnail.jpeg",
+                "title":"Picasso's picture",
+                "type":"IMAGE",
+                "url":"./assets/images/picasso.jpeg"
+            },
+            {
+                "thumbnail":"./assets/images/dama_thumbnail.jpeg",
+                "title":"La dama con l'ermellino",
+                "type":"IMAGE",
+                "url":"./assets/images/dama.jpeg"
+            }
+            /*continue for all media you want to add ...*/
+        ];
+        vm.listMediaModal = null;
+        vm.openViewerModal = function(){
+            vm.listMediaModal = {};
+            vm.listMediaModal.medias = medias;
+            vm.listMediaModal.options = {
+                modal:true,
+                btnClose: true,
+                fnClose: function(){
+                    vm.listMediaModal = null;
+                },
+                fnClosePrm:[]
+            };
+        };
+    }
+&lt;/script></span></code></pre>
+                    </figure>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h3>Installation</h3>
+                    </div>
+                    <h4>Method 1: Install with bower</h4>
+                    <figure class="highlight">
+                        <pre><code>$ bower install metaMediaViewer</code></pre>
+                    </figure>
+                    <h4>Method 2: Install with npm</h4>
+                    <figure class="highlight">
+                        <pre><code>$ npm install metaMediaViewer</code></pre>
+                    </figure>
+                    <h4>Method 3: Download the files</h4>
+                    <a class="btn btn-primary" href="https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip">Download</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h3>Initialization </h3>
+                    </div>
+                    <p>Reference dependencies and plugin in the html</p>
+                    <ul>
+                        <li>jQuery (1.9.0+ https://jquery.com/)</li>
+                        <li>Angularjs (1.4.0+ https://angularjs.org/)</li>
+                        <li>Bootstrap CSS (3.3.5+ http://getbootstrap.com/)</li>
+                        <li>Ui-Bootstrap (1.1.0+ https://angular-ui.github.io/bootstrap/)</li>
+                        <li>Videogular, with poster, overlayplay and controls plugin (1.2.5+ http://www.videogular.com/)</li>
+                        <li>Angular Pdfjs Viewer (1.0.0+ https://github.com/legalthings/angular-pdfjs-viewer)</li>
+                        <li>metaMediaViewer (0.1.0+ https://gruppometa.github.io/metaMediaViewer)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h3>Usage</h3>
+                    </div>
+                    <ul>
+                        <li>Inject into your module the 'metaMediaViewerMdl' dependency:
+                            <figure class="highlight">
+                                <pre><code class="language-html" data-lang="html"><span class="nt">angular.module('myApp',['metaMediaViewerMdl']);</span></code></pre></figure>
+                        </li>
+                        <li>
+                            create an object with the information to pass to the directive:
+                            <figure class="highlight">
+                                <pre><code class="language-html" data-lang="html"><span class="nt">var medias = [
+    {
+        "thumbnail":"./assets/images/picasso_thumbnail.jpeg",
+        "title":"Picasso's picture",
+        "type":"IMAGE",
+        "url":"./assets/images/picasso.jpeg"
+    },
+    {
+        "thumbnail":"./assets/images/dama_thumbnail.jpeg",
+        "title":"La dama con l'ermellino",
+        "type":"IMAGE",
+        "url":"./assets/images/dama.jpeg"
+    }
+            /*continue for all media you want to add ...*/
+];
+vm.listMedia = {
+    "medias": medias,
+    "options": {
+        btnClose: false,
+        theme:"light"
+    }
+};</span></code></pre>
+                            </figure>
+                        </li>
+                        <li>
+                            put the directive in your html:
+                            <figure class="highlight">
+                                <pre><code class="language-html" data-lang="html"><span class="nt">&lt;meta-media-viewer medias="vm.listMedia.medias" options="vm.listMedia.options">&lt;/meta-media-viewer></span></code></pre>
+                            </figure>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h3>Options Configuration <small>Here are the keys that you can use in the options' object passed to the directive</small></h3>
+                    </div>
+                    <table class="table tableConf table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Argument</th>
+                                <th class="possibleValue">Possible value</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>modal</td>
+                                <td>true<br/>false</td>
+                                <td>A boolean to open the directive in modal mode.</td>
+                            </tr>
+                            <tr>
+                                <td>customClass</td>
+                                <td></td>
+                                <td>A string that represent a class to add to the directive's container.</td>
+                            </tr>
+                            <tr>
+                                <td>theme</td>
+                                <td>dark<br/>light</td>
+                                <td>A string that represent the theme used to render the directive. The default theme is <mark>dark</mark></td>
+                            </tr>
+                            <tr>
+                                <td>btnClose</td>
+                                <td>true<br/>false</td>
+                                <td>A boolean to enable/disable the close button in the directive.</td>
+                            </tr>
+                            <tr>
+                                <td>close</td>
+                                <td>true<br/>false</td>
+                                <td>A boolean use to show or not the standard close button.</td>
+                            </tr>
+                            <tr>
+                                <td>fnClose</td>
+                                <td></td>
+                                <td>A function that you want to run when the close button is clicked. You can pass one or more argument to function: the corresponding parameters must be entered in an array referenced in the options' field <mark>fnClosePrm</mark></td>
+                            </tr>
+                            <tr>
+                                <td>fnClose</td>
+                                <td></td>
+                                <td>An array of the arguments passed to <mark>fnClose</mark> function</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
