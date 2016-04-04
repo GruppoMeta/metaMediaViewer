@@ -1,6 +1,6 @@
 {
   "name": "meta-media-viewer",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "https://github.com/GruppoMeta/metaMediaViewer",
   "description": "Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf",
   "main": "dist/metaMediaViewer.js",
