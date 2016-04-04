@@ -31,6 +31,9 @@ The plugin requires
 * Panel of media open
 ![Alt text](/screen/image2.png "Panel of media open")
 
+* Modal mode and dark theme
+![Alt text](/screen/image3.png "Modal mode and dark theme")
+
 ## Bug, questions, contributions?
 
 
