@@ -19,10 +19,10 @@ The plugin requires
 * [Angular Pdfjs Viewer 1.0.0+](https://github.com/legalthings/angular-pdfjs-viewer)
 
 ## Initialization, Configuration, Usage & Demo
-Install dependencies (`bower install`)
-Put a video called `video_example.mp4` in `example/assets/video` directory
-Put an audio called `audio_example.mp4` in `example/assets/audio` directory
-Open `index.html` file in `example` directory.
+* Install dependencies (`bower install`)
+* Put a video called `video_example.mp4` in `example/assets/video` directory
+* Put an audio called `audio_example.mp4` in `example/assets/audio` directory
+* Open `index.html` file in `example` directory.
 
 ## Bug, questions, contributions?
 
