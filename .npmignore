@@ -3,8 +3,8 @@ bower_components
 dev
 example/assets/video/video_example.mp4
 example/assets/audio/audio_example.mp3
-build
 example
+src
 screen
 \#*
 *~

@@ -7,8 +7,8 @@
   ],
   "description": "Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf",
   "main": [
-      "src/metaMediaViewer.js",
-      "src/metaMediaViewer.css"
+      "dist/metaMediaViewer.js",
+      "dist/metaMediaViewer.css"
   ],
   "dependencies": {
     "jquery": "^1.8.0",
