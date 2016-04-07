@@ -37,6 +37,7 @@ The plugin requires
 ## News
 v0.2.4
 * Changed `build` folder with `src`
+
 v0.2.1
 * Added zoomIn and zoomOut button for IMAGE type
 
