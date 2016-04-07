@@ -8,41 +8,42 @@ var templateCache = require('gulp-angular-templatecache');
 var concat = require('gulp-concat');
  
 gulp.task('uglify', function() {
-  return gulp.src('./build/*.js')
+  return gulp.src('./src/*.js')
     .pipe(ngAnnotate())
     .pipe(uglify())
-    .pipe(gulp.dest('./src'))
+    .pipe(gulp.dest('./dist'))
 });
 
 gulp.task('concatJs', function() {
-  return gulp.src('./build/*.js')
+  return gulp.src('./src/*.js')
     .pipe(concat('metaMediaViewer.js'))
     .pipe(gulp.dest('./dev/'));
 });
  
 gulp.task('less', function () {
-  return gulp.src('./build/*.less')
+  return gulp.src('./src/*.less')
     .pipe(less({
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('src'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('copy-js', function() {
-  return gulp.src('./build/*.js')
-    .pipe(gulp.dest('./src'));
+  return gulp.src('./src/*.js')
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('template', function () {
-  return gulp.src('./build/*.html')
+  return gulp.src('./src/*.html')
     .pipe(templateCache(
         {
             "module":"metaMediaViewerMdl"
         }
     ))
-    .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest('./src'));
 });
 
-gulp.task('build', ['less','concatJs']);
+//se si sono fatte modifiche ai file di template html, prima di eseguire i task per creare file di sviluppo ('dev') o di produzione ('dist') lanciare il task 'gulp template'
+gulp.task('dev', ['less','concatJs']);
 gulp.task('dist', ['less','uglify']);

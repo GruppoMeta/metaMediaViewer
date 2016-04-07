@@ -1,9 +1,9 @@
-# metaMediaViewer - 0.2.3
+# metaMediaViewer - 0.2.4
 
 `metaMediaViewer` - Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf.
 
 ## Installation
-* Download the latest release: [v0.2.3](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
+* Download the latest release: [v0.2.4](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
 * Clone the repository: `git clone https://github.com/GruppoMeta/metaMediaViewer.git`
 * Install with [Bower](http://bower.io): `bower install metaMediaViewer`
 * Install with [Npm](https://www.npmjs.com/): `npm install metaMediaViewer`
@@ -32,13 +32,11 @@ The plugin requires
 ![Alt text](/screen/image2.jpg "Panel of media open")
 
 * Modal mode and dark theme
-![Alt text](/screen/image3.jpg "Modal mode and dark theme")
+![Alt text](/screen/image3.png "Modal mode and dark theme")
 
 ## News
-v0.2.3
-* Changed `dist` folder with `src`
-
-## News
+v0.2.4
+* Changed `build` folder with `src`
 v0.2.1
 * Added zoomIn and zoomOut button for IMAGE type
 
