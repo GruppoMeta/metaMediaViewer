@@ -11,7 +11,7 @@ gulp.task('uglify', function() {
   return gulp.src('./build/*.js')
     .pipe(ngAnnotate())
     .pipe(uglify())
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./src'))
 });
 
 gulp.task('concatJs', function() {
@@ -26,12 +26,12 @@ gulp.task('less', function () {
       paths: [ path.join(__dirname, 'less', 'includes') ]
     }))
     .pipe(cleanCSS({compatibility: 'ie8'}))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('src'));
 });
 
 gulp.task('copy-js', function() {
   return gulp.src('./build/*.js')
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./src'));
 });
 
 gulp.task('template', function () {
