@@ -32,7 +32,7 @@ The plugin requires
 ![Alt text](/screen/image2.jpg "Panel of media open")
 
 * Modal mode and dark theme
-![Alt text](/screen/image3.png "Modal mode and dark theme")
+![Alt text](/screen/image3.jpg "Modal mode and dark theme")
 
 ## News
 v0.2.4
