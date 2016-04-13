@@ -1,6 +1,6 @@
 {
   "name": "metaMediaViewer",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "homepage": "https://github.com/GruppoMeta/metaMediaViewer",
   "authors": [
     "Gruppo Meta srl <matteo.rossi@gruppometa.it>"
@@ -17,12 +17,21 @@
     "angular-bootstrap": "^1.2.5",
     "components-font-awesome":"^4.5.0",
     "angular-pdfjs-viewer":"^0.6.1",
+    "pdf.js-viewer":"^0.1.0",
     "videogular": "~1.2.5",
     "videogular-buffering": "~1.2.5",
     "videogular-controls": "~1.2.5",
     "videogular-overlay-play": "~1.2.5",
     "videogular-poster": "~1.2.5",
     "videogular-themes-default": "~1.2.5"
+  },
+  "overrides": {
+    "pdf.js-viewer": {
+      "main": [
+        "pdf.js",
+        "viewer.css"
+      ]
+    }
   },
   "keywords": [
       "multimedia",

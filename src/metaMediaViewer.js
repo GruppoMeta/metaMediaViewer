@@ -40,9 +40,6 @@
         var timestamp = new Date().getTime();
         vm.modalMode = vm.options.modal;
         vm.contentHeight = !vm.modalMode && vm.options.height;
-        vm.pdfjsViewer = {
-            url: "pdfViewer.html"
-        };
         vm.videogular = {};
         vm.videogular.onUpdateTime = function(current,total) {
             vm.videogular.currentTime = current*1000;
@@ -65,7 +62,7 @@
             vm.currentMedia = val ? val : dir ? vm.currentMedia+dir : 1;
             vm.media = vm.medias[vm.currentMedia-1];
             if(vm.media.type==="PDF"){
-                vm.media.PdfUrl = vm.pdfjsViewer.url + "?file=" + vm.media.url;
+                vm.media.PdfUrl = $sce.trustAsResourceUrl(vm.media.url);
             }
             else if(vm.media.type==="VIDEO" || vm.media.type==="AUDIO"){
                 vm.videogular.config.sources = [];

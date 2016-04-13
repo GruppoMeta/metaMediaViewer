@@ -167,6 +167,7 @@
                         <li>Ui-Bootstrap (1.1.0+ https://angular-ui.github.io/bootstrap/)</li>
                         <li>Videogular, with poster, overlayplay and controls plugin (1.2.5+ http://www.videogular.com/)</li>
                         <li>Angular Pdfjs Viewer (1.0.0+ https://github.com/legalthings/angular-pdfjs-viewer)</li>
+                        <li>Pdf.js-viewer (0.1.0+ https://github.com/legalthings/pdf.js-viewer)
                         <li>metaMediaViewer (0.1.0+ https://gruppometa.github.io/metaMediaViewer)</li>
                     </ul>
                 </div>
@@ -215,6 +216,37 @@ vm.listMedia = {
                             </figure>
                         </li>
                     </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header">
+                        <h3>Advanced configuration for Pdf viewer</h3>
+                    </div>
+                    <p>By default the location of PDF.js assets are automatically determined. However if you place them on alternative locations they may not be found. If so, you can configure these locations.</p>
+<p>You may choice to disable use of Web Workers API. This is useful if you want to add pdf.worker.js to your concatinated JavaScript file. However this will have a negative effect on the runtime performance.</p>
+                    <figure class="highlight">
+                        <pre><code class="language-html" data-lang="html"><span class="nt">angular.module('myApp').config(function(pdfjsViewerConfigProvider) {
+    //To configure locations for Pdf viewer files use:
+    pdfjsViewerConfigProvider.setWorkerSrc("/assets/pdf.js-viewer/pdf.worker.js");
+    pdfjsViewerConfigProvider.setCmapDir("/assets/pdf.js-viewer/cmaps");
+    pdfjsViewerConfigProvider.setImageDir("/assets/pdf.js-viewer/images");
+    
+    //to disable worker
+    pdfjsViewerConfigProvider.disableWorker();
+});</span></code></pre>
+                    </figure>
+                    <p>To reference the viewer.css file, override the pdf.js-viewer options in your bower.json like this:</p>
+                    <figure class="highlight">
+                        <pre><code class="language-html" data-lang="js"><span class="nt">"overrides": {
+    "pdf.js-viewer": {
+        "main": [
+            "pdf.js",
+            "viewer.css"
+        ]
+    }
+}</span></code></pre>
+                    </figure>
                 </div>
             </div>
             <div class="row">
