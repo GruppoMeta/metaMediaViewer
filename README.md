@@ -1,9 +1,9 @@
-# metaMediaViewer - 0.2.6
+# metaMediaViewer - 0.2.7
 
 `metaMediaViewer` - Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf.
 
 ## Installation
-* Download the latest release: [v0.2.6](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
+* Download the latest release: [v0.2.7](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
 * Clone the repository: `git clone https://github.com/GruppoMeta/metaMediaViewer.git`
 * Install with [Bower](http://bower.io): `bower install metaMediaViewer`
 * Install with [Npm](https://www.npmjs.com/): `npm install metaMediaViewer`
@@ -40,13 +40,15 @@ var medias = [
         "thumbnail":"./assets/images/picasso_thumbnail.jpeg",
         "title":"Picasso's picture",
         "type":"IMAGE",
-        "url":"./assets/images/picasso.jpeg"
+        "url":"./assets/images/picasso.jpeg",
+        "mimeType":"image/jpeg" //not mandatory for image, recommended for audio and video
     },
     {
         "thumbnail":"./assets/images/dama_thumbnail.jpeg",
         "title":"La dama con l'ermellino",
         "type":"IMAGE",
-        "url":"./assets/images/dama.jpeg"
+        "url":"./assets/images/dama.jpeg",
+        "mimeType":"image/jpeg" //not mandatory for image, recommended for audio and video
     }
     /*continue for all media you want to add ...*/
 ];
@@ -104,6 +106,9 @@ To reference the viewer.css file, override the pdf.js-viewer options in your bow
 ![Alt text](/screen/image3.jpg "Modal mode and dark theme")
 
 ## News
+v0.2.7
+* Added field `mimeType` in media object to describe the mime type of the media (recommended for audio and video)
+
 v0.2.4
 * Changed `build` folder with `src`
 
