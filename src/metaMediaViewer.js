@@ -61,14 +61,24 @@
         vm.setMedia = function(val,dir){
             vm.currentMedia = val ? val : dir ? vm.currentMedia+dir : 1;
             vm.media = vm.medias[vm.currentMedia-1];
+            var getMimeType = function(media,type,url){
+                var arType = ["mp3","mp4","mkv","flv","vob","ogv","wmv","mpv","m2v","mpg","mpeg","ogg","mov","avi","wav","3gp","m4a","m4b","m4p","oga","mogg","raw","wma","wv","webm"]
+                if(media.mimeType)
+                    return media.mimeType;
+                var ext = arType.indexOf(url.split('.').pop());
+                if(ext!==-1)
+                    return type.toLowerCase() + "/" + url.split('.').pop();
+                var custom = type === "AUDIO" ? "mp3" : "mp4";
+                return type.toLowerCase() + "/" + custom;
+            };
             if(vm.media.type==="PDF"){
                 vm.media.PdfUrl = $sce.trustAsResourceUrl(vm.media.url);
             }
             else if(vm.media.type==="VIDEO" || vm.media.type==="AUDIO"){
                 vm.videogular.config.sources = [];
-                var extension = vm.media.url.split('.').pop();
+                var mimeType = getMimeType(vm.media,vm.media.type,vm.media.url);
                 var source = {
-                    src: $sce.trustAsResourceUrl(vm.media.url), type: vm.media.type.toLowerCase() + "/" + extension
+                    src: $sce.trustAsResourceUrl(vm.media.url), type: mimeType
                 };
                 vm.videogular.config.sources.push(source);
             }
