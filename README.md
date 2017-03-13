@@ -106,6 +106,9 @@ To reference the viewer.css file, override the pdf.js-viewer options in your bow
 ![Alt text](/screen/image3.jpg "Modal mode and dark theme")
 
 ## News
+v0.2.9
+* Added title media in box preview
+
 v0.2.7
 * Added field `mimeType` in media object to describe the mime type of the media (recommended for audio and video)
 
