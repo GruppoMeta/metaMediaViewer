@@ -1,9 +1,9 @@
-# metaMediaViewer - 0.2.7
+# metaMediaViewer - 0.2.9
 
 `metaMediaViewer` - Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf.
 
 ## Installation
-* Download the latest release: [v0.2.7](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
+* Download the latest release: [v0.2.9](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
 * Clone the repository: `git clone https://github.com/GruppoMeta/metaMediaViewer.git`
 * Install with [Bower](http://bower.io): `bower install metaMediaViewer`
 * Install with [Npm](https://www.npmjs.com/): `npm install metaMediaViewer`
@@ -12,12 +12,12 @@
 ## Requirements
 The plugin requires
 * [jQuery 1.9.0+](http://jquery.com)
-* [Angularjs 1.4.0+](https://angularjs.org/)
+* [Angularjs 1.5.0+](https://angularjs.org/)
 * [Bootstrap CSS 3.3.5+](http://getbootstrap.com)
 * [Ui-Bootstrap 1.1.0+](https://angular-ui.github.io/bootstrap)
 * [Videogular, with poster, overlayplay and controls plugin 1.2.5+](http://www.videogular.com)
 * [Angular Pdfjs Viewer 1.0.0+](https://github.com/legalthings/angular-pdfjs-viewer)
-* [Pdf.js-viewer 0.1.0+](https://github.com/legalthings/pdf.js-viewer)
+* [Pdf.js-viewer 0.2.0+](https://github.com/legalthings/pdf.js-viewer)
 
 ## Initialization, Configuration, Usage & Demo
 * Install dependencies (`bower install`)
