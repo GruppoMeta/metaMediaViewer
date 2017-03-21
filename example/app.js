@@ -6,6 +6,12 @@
     function appCtrl(){
         var vm = this;
         var medias = [
+           {
+                "thumbnail":"./example/assets/html/html.jpeg",
+                "title":"Gruppo Meta srl",
+                "type":"HTML",
+                "url":"https://www.gruppometa.it"
+            },
             {
                 "thumbnail":"./example/assets/images/picasso_thumbnail.jpeg",
                 "title":"Picasso's picture",

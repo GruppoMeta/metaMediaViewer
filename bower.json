@@ -1,6 +1,6 @@
 {
   "name": "metaMediaViewer",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "homepage": "https://github.com/GruppoMeta/metaMediaViewer",
   "authors": [
     "Gruppo Meta srl <matteo.rossi@gruppometa.it>"
@@ -41,7 +41,8 @@
     "image",
     "video",
     "audio",
-    "pdf"
+    "pdf",
+    "html"
   ],
   "license": "MIT",
   "ignore": [

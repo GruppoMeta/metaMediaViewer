@@ -1,9 +1,9 @@
-# metaMediaViewer - 0.2.9
+# metaMediaViewer - 0.3.0
 
-`metaMediaViewer` - Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf.
+`metaMediaViewer` - Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf, html.
 
 ## Installation
-* Download the latest release: [v0.2.9](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
+* Download the latest release: [v0.3.0](https://github.com/GruppoMeta/metaMediaViewer/archive/master.zip)
 * Clone the repository: `git clone https://github.com/GruppoMeta/metaMediaViewer.git`
 * Install with [Bower](http://bower.io): `bower install metaMediaViewer`
 * Install with [Npm](https://www.npmjs.com/): `npm install metaMediaViewer`
@@ -106,6 +106,9 @@ To reference the viewer.css file, override the pdf.js-viewer options in your bow
 ![Alt text](/screen/image3.jpg "Modal mode and dark theme")
 
 ## News
+v0.3.0
+* Added support to html type (html type's medias are opened in iframe)
+
 v0.2.9
 * Added title media in box preview
 

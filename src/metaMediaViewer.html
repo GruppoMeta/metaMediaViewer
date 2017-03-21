@@ -84,6 +84,9 @@
                     <vg-poster vg-url='metaMediaViewer.media.thumbnail'></vg-poster>
                 </videogular>
             </div>
+            <div class="box-html" ng-show="metaMediaViewer.media.type==='HTML'" >
+                <iframe ng-src="{{metaMediaViewer.safeUrl(metaMediaViewer.media.url)}}" frameborder="0"><iframe>
+            </div>
         </div>
     </div>
 </div>

@@ -121,6 +121,9 @@
             vm.setZoom-=0.2;
             $element.find('.body img').css("zoom",vm.setZoom);
         };
+        vm.safeUrl = function(url){
+            return $sce.trustAsResourceUrl(url);
+        };
         $scope.$watch("metaMediaViewer.currentMedia",function(newVal,oldVal){
             if(newVal && newVal!==oldVal){
                 vm.setMedia(newVal);
@@ -135,7 +138,7 @@
             }
         };
         vm.checkSupportedMedia = function(tipo){
-            var supportMedia = ["IMAGE","VIDEO","AUDIO","PDF"];
+            var supportMedia = ["IMAGE","VIDEO","AUDIO","PDF","HTML"];
             var support = supportMedia.indexOf(tipo) !==-1 ? true : false;
             return support;
         };
