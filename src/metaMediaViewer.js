@@ -31,7 +31,7 @@
     }
 
     /** @ngInject */
-    function metaMediaViewerController($scope,$sce,$element) {
+    function metaMediaViewerController($scope,$sce,$element,$timeout) {
         // inizializzo una variabile che referenzia il modulo
         var vm = this;
         var render = function(){
@@ -60,35 +60,43 @@
         vm.prev = false;
         vm.next = false;
         vm.setMedia = function(val,dir){
-            vm.currentMedia = val ? val : dir ? vm.currentMedia+dir : 1;
-            vm.media = vm.medias[vm.currentMedia-1];
-            var getMimeType = function(media,type,url){
-                var arType = ["mp3","mp4","mkv","flv","vob","ogv","wmv","mpv","m2v","mpg","mpeg","ogg","mov","avi","wav","3gp","m4a","m4b","m4p","oga","mogg","raw","wma","wv","webm"]
-                if(media.mimeType)
-                    return media.mimeType;
-                var ext = arType.indexOf(url.split('.').pop());
-                if(ext!==-1)
-                    return type.toLowerCase() + "/" + url.split('.').pop();
-                var custom = type === "AUDIO" ? "mp3" : "mp4";
-                return type.toLowerCase() + "/" + custom;
-            };
-            if(vm.media.type==="PDF"){
-                vm.media.PdfUrl = $sce.trustAsResourceUrl(vm.media.url);
-            }
-            else if(vm.media.type==="VIDEO" || vm.media.type==="AUDIO"){
-                vm.videogular.config.sources = [];
-                var mimeType = getMimeType(vm.media,vm.media.type,vm.media.url);
-                var source = {
-                    src: $sce.trustAsResourceUrl(vm.media.url), type: mimeType
+            var loadMedia = function(){
+                vm.currentMedia = val ? val : dir ? vm.currentMedia+dir : 1;
+                vm.media = vm.medias[vm.currentMedia-1];
+                var getMimeType = function(media,type,url){
+                    var arType = ["mp3","mp4","mkv","flv","vob","ogv","wmv","mpv","m2v","mpg","mpeg","ogg","mov","avi","wav","3gp","m4a","m4b","m4p","oga","mogg","raw","wma","wv","webm"]
+                    if(media.mimeType)
+                        return media.mimeType;
+                    var ext = arType.indexOf(url.split('.').pop());
+                    if(ext!==-1)
+                        return type.toLowerCase() + "/" + url.split('.').pop();
+                    var custom = type === "AUDIO" ? "mp3" : "mp4";
+                    return type.toLowerCase() + "/" + custom;
                 };
-                vm.videogular.config.sources.push(source);
+                if(vm.media.type==="PDF"){
+                    vm.media.PdfUrl = $sce.trustAsResourceUrl(vm.media.url);
+                }
+                else if(vm.media.type==="VIDEO" || vm.media.type==="AUDIO"){
+                    vm.videogular.config.sources = [];
+                    vm.videogular.config.autoPlay=0;
+                    vm.videogular.config.preload=0;
+                    var mimeType = getMimeType(vm.media,vm.media.type,vm.media.url);
+                    var source = {
+                        src: $sce.trustAsResourceUrl(vm.media.url), type: mimeType
+                    };
+                    vm.videogular.config.sources.push(source);
+                }
+                else {
+                    vm.media.url = vm.media.url.indexOf("?timestamp=" + timestamp) === -1 ? vm.media.url + "?timestamp=" + timestamp : vm.media.url;
+                    $element.find(".body img").off().on("load",$scope.setInitZoom);
+                }
+                vm.prev = vm.currentMedia>1 ? true : false;
+                vm.next = vm.currentMedia<(vm.medias.length) ? true : false;
             }
-            else {
-                vm.media.url = vm.media.url.indexOf("?timestamp=" + timestamp) === -1 ? vm.media.url + "?timestamp=" + timestamp : vm.media.url;
-                $element.find(".body img").off().on("load",$scope.setInitZoom);
-            }
-            vm.prev = vm.currentMedia>1 ? true : false;
-            vm.next = vm.currentMedia<(vm.medias.length) ? true : false;
+            vm.media = null;
+            $timeout(function(){
+                loadMedia();
+            },300);
         };
         vm.setZoom = null;
         $scope.setInitZoom = function(ev){
