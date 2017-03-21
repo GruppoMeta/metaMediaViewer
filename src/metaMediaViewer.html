@@ -53,7 +53,7 @@
             <div class="box-none" ng-if="metaMediaViewer.media && !metaMediaViewer.checkSupportedMedia(metaMediaViewer.media.type)">
                 <h3>Tipo di media non supportato</h3>
             </div>
-            <div class="box-img" ng-show="metaMediaViewer.media.type==='IMAGE'" >
+            <div class="box-img" ng-if="metaMediaViewer.media.type==='IMAGE'" >
                 <img ng-src="{{metaMediaViewer.media.url}}" ng-init="metaMediaViewer.setInitZoom()"/>
             </div>
             <div class="box-pdf" ng-if="metaMediaViewer.media.type==='PDF'">
@@ -62,7 +62,7 @@
                 </pdfjs-viewer>
             </div>
             <div class="box-multimedia" ng-if="metaMediaViewer.media.type==='VIDEO' || metaMediaViewer.media.type==='AUDIO'">
-                <videogular vg-update-time="metaMediaViewer.videogular.onUpdateTime($currentTime, $duration)" vg-theme="metaMediaViewer.videogular.config.theme" vg-preload="metaMediaViewer.videogular.config.preload" vg-auto-play="metaMediaViewer.videogular.config.autoPlay">
+                <videogular vg-update-time="metaMediaViewer.videogular.onUpdateTime($currentTime, $duration)" vg-theme="metaMediaViewer.videogular.config.theme" vg-auto-play="metaMediaViewer.videogular.config.autoPlay">
                     <vg-media vg-src="metaMediaViewer.videogular.config.sources">
                     </vg-media>
 
@@ -84,7 +84,7 @@
                     <vg-poster vg-url='metaMediaViewer.media.thumbnail'></vg-poster>
                 </videogular>
             </div>
-            <div class="box-html" ng-show="metaMediaViewer.media.type==='HTML'" >
+            <div class="box-html" ng-if="metaMediaViewer.media.type==='HTML'" >
                 <iframe ng-src="{{metaMediaViewer.safeUrl(metaMediaViewer.media.url)}}" frameborder="0"><iframe>
             </div>
         </div>

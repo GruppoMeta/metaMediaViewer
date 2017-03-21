@@ -1,4 +1,4 @@
-# metaMediaViewer - 0.3.1
+# metaMediaViewer - 0.3.2
 
 `metaMediaViewer` - Meta Media Viewer for angular applications. It allows you to view a carousel of elements. Compatible media : images, video, audio, pdf, html.
 
@@ -122,6 +122,9 @@ v0.2.1
 * Added zoomIn and zoomOut button for IMAGE type
 
 ## Bug fixed
+v0.3.2
+* Fixed problem download multimedia
+
 v0.3.1
 * Fixed problem loading multiple audio/video
 
