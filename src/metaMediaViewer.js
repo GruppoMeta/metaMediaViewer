@@ -38,6 +38,7 @@
             $element.find(".body img").on("load",$scope.setInitZoom);
             vm.setMedia(1); 
         };
+        vm.zoomSupported = "zoom" in document.body.style;
         var timestamp = new Date().getTime();
         vm.modalMode = vm.options.modal;
         vm.contentHeight = !vm.modalMode && vm.options.height;
@@ -88,7 +89,13 @@
                 }
                 else {
                     vm.media.url = vm.media.url.indexOf("?timestamp=" + timestamp) === -1 ? vm.media.url + "?timestamp=" + timestamp : vm.media.url;
-                    $element.find(".body img").off().on("load",$scope.setInitZoom);
+                    //$element.find(".body img").off().on("load",$scope.setInitZoom);
+                    var img = new Image();
+                    img.addEventListener('load', function(){
+                        $scope.setInitZoom();
+                        $scope.$apply();
+                    }, false);
+                    img.src = vm.media.url;
                 }
                 vm.prev = vm.currentMedia>1 ? true : false;
                 vm.next = vm.currentMedia<(vm.medias.length) ? true : false;
@@ -118,16 +125,34 @@
             else{
                 vm.setZoom = zoomWidth || zoomHeight || 1;
             }
-            $element.find('.body img').css("zoom",vm.setZoom);
+            if(vm.zoomSupported){
+                $element.find('.body img').css("transform","none");
+                $element.find('.body img').css("zoom",vm.setZoom);
+            }
+            else{
+                $element.find('.body img').css("transform","scale("+vm.setZoom+")");
+                $element.find('.body img').css("transform-origin","top");
+            }
             $element.find(".body img").off("load");
         };
+
         vm.zoomIn = function(){
             vm.setZoom+=0.2;
-            $element.find('.body img').css("zoom",vm.setZoom);
+            if(vm.zoomSupported)
+                $element.find('.body img').css("zoom",vm.setZoom);
+            else{
+                $element.find('.body img').css("transform","scale("+vm.setZoom+")");
+                $element.find('.body img').css("transform-origin","top");
+            }
         };
         vm.zoomOut = function(){
             vm.setZoom-=0.2;
-            $element.find('.body img').css("zoom",vm.setZoom);
+            if(vm.zoomSupported)
+                $element.find('.body img').css("zoom",vm.setZoom);
+            else{
+                $element.find('.body img').css("transform","scale("+vm.setZoom+")");
+                $element.find('.body img').css("transform-origin","top");
+            }
         };
         vm.safeUrl = function(url){
             return $sce.trustAsResourceUrl(url);
@@ -149,6 +174,34 @@
             var supportMedia = ["IMAGE","VIDEO","AUDIO","PDF","HTML"];
             var support = supportMedia.indexOf(tipo) !==-1 ? true : false;
             return support;
+        };
+        vm.onUpdateState = function(state){
+            if(state==='play'){
+                createSoundWave();
+            }
+            else
+                renderPlayBtn();
+        }
+        var createSoundWave = function(){
+            var tpl = '<div id="bars">'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                  '<div class="bar"></div>'+
+                '</div>';
+            var container = $('.overlayPlayContainer');
+            container.html(tpl);
+        };
+        var renderPlayBtn = function(){
+            var tpl = '<div class="iconButton play" ng-class="overlayPlayIcon"></div>';
+            var container = $('.overlayPlayContainer');
+            container.html(tpl);
         };
         render();
     }
