@@ -176,6 +176,8 @@
             return support;
         };
         vm.onUpdateState = function(state){
+            if(vm.media.type!=='AUDIO')
+                return;
             if(state==='play'){
                 createSoundWave();
             }
