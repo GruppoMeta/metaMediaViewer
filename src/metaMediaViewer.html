@@ -14,12 +14,28 @@
                     ng-if="metaMediaViewer.media.download!==false">
                     <span class="fa fa-download"></span>
                 </a>
-                <a class="btn-zoom btnHeader" ng-if="metaMediaViewer.media.type==='IMAGE'" ng-click="metaMediaViewer.zoomOut()">
+                <a class="btn-zoom btnHeader" ng-if="!metaMediaViewer.loadingImg && metaMediaViewer.media.type==='IMAGE'" ng-click="metaMediaViewer.zoomOut()">
                     <span class="fa fa-search-minus"></span>
                 </a>
-                <a class="btn-zoom btnHeader" ng-if="metaMediaViewer.media.type==='IMAGE'" ng-click="metaMediaViewer.zoomIn()">
+                <a class="btn-zoom btnHeader" ng-if="!metaMediaViewer.loadingImg && metaMediaViewer.media.type==='IMAGE'" ng-click="metaMediaViewer.zoomIn()">
                     <span class="fa fa-search-plus"></span>
                 </a>
+            </div>
+            <div class="btn-spinner" ng-if="metaMediaViewer.loadingImg && metaMediaViewer.media.type==='IMAGE'">
+                <div class="sk-circle">
+                    <div class="sk-circle1 sk-child"></div>
+                    <div class="sk-circle2 sk-child"></div>
+                    <div class="sk-circle3 sk-child"></div>
+                    <div class="sk-circle4 sk-child"></div>
+                    <div class="sk-circle5 sk-child"></div>
+                    <div class="sk-circle6 sk-child"></div>
+                    <div class="sk-circle7 sk-child"></div>
+                    <div class="sk-circle8 sk-child"></div>
+                    <div class="sk-circle9 sk-child"></div>
+                    <div class="sk-circle10 sk-child"></div>
+                    <div class="sk-circle11 sk-child"></div>
+                    <div class="sk-circle12 sk-child"></div>
+                </div>
             </div>
             <div class="title" ng-class="{'margin-large':metaMediaViewer.media.type==='IMAGE'}">{{metaMediaViewer.media.title}}</div>
             <div class="btn-close" ng-if="metaMediaViewer.options.btnClose" ng-click="metaMediaViewer.close()">

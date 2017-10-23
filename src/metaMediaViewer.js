@@ -60,7 +60,9 @@
         vm.media = null;
         vm.prev = false;
         vm.next = false;
+        vm.loadingImg = false;
         vm.setMedia = function(val,dir){
+            vm.loadingImg = false;
             var loadMedia = function(){
                 vm.currentMedia = val ? val : dir ? vm.currentMedia+dir : 1;
                 vm.media = vm.medias[vm.currentMedia-1];
@@ -90,9 +92,11 @@
                 else {
                     vm.media.url = vm.media.url.indexOf("?timestamp=" + timestamp) === -1 ? vm.media.url + "?timestamp=" + timestamp : vm.media.url;
                     //$element.find(".body img").off().on("load",$scope.setInitZoom);
+                    vm.loadingImg = true;
                     var img = new Image();
                     img.addEventListener('load', function(){
                         $scope.setInitZoom();
+                        vm.loadingImg = false;
                         $scope.$apply();
                     }, false);
                     img.src = vm.media.url;
@@ -130,28 +134,40 @@
                 $element.find('.body img').css("zoom",vm.setZoom);
             }
             else{
-                $element.find('.body img').css("transform","scale("+vm.setZoom+")");
-                $element.find('.body img').css("transform-origin","top");
+                $element.find('.body img').css("width",widthImg*vm.setZoom+'px');
+                $element.find('.body img').css("height",heightImg*vm.setZoom+'px');
             }
             $element.find(".body img").off("load");
         };
 
         vm.zoomIn = function(){
             vm.setZoom+=0.2;
+            var widthImg = $element.find('.body img').width();
+            var heightImg = $element.find('.body img').height();
+            var widthBody = $element.find('.box-img').width();
             if(vm.zoomSupported)
                 $element.find('.body img').css("zoom",vm.setZoom);
             else{
-                $element.find('.body img').css("transform","scale("+vm.setZoom+")");
-                $element.find('.body img').css("transform-origin","top");
+                var newWidthImg = widthImg+(widthImg*0.2);
+                $element.find('.body img').css("width",newWidthImg+'px');
+                $element.find('.body img').css("height",heightImg+(heightImg*0.2)+'px');
+                if(newWidthImg>widthBody)
+                    $element.find('.box-img').scrollLeft((newWidthImg-widthBody)/2);
             }
         };
         vm.zoomOut = function(){
             vm.setZoom-=0.2;
+            var widthImg = $element.find('.body img').width();
+            var heightImg = $element.find('.body img').height();
+            var widthBody = $element.find('.body').width();
             if(vm.zoomSupported)
                 $element.find('.body img').css("zoom",vm.setZoom);
             else{
-                $element.find('.body img').css("transform","scale("+vm.setZoom+")");
-                $element.find('.body img').css("transform-origin","top");
+                var newWidthImg = widthImg-(widthImg*0.2);
+                $element.find('.body img').css("width",newWidthImg+'px');
+                $element.find('.body img').css("height",heightImg-(heightImg*0.2)+'px');
+                if(newWidthImg>widthBody)
+                    $element.find('.box-img').scrollLeft((newWidthImg-widthBody)/2);
             }
         };
         vm.safeUrl = function(url){
