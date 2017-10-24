@@ -109,6 +109,9 @@
                 loadMedia();
             },300);
         };
+        var initZoom;
+        var initWidth;
+        var blockZoom = false;
         vm.setZoom = null;
         $scope.setInitZoom = function(ev){
             var zoomWidth = null;
@@ -132,12 +135,14 @@
             if(vm.zoomSupported){
                 $element.find('.body img').css("transform","none");
                 $element.find('.body img').css("zoom",vm.setZoom);
+                initZoom = vm.setZoom;
             }
             else{
                 $element.find('.body img').css("width",widthImg*vm.setZoom+'px');
                 $element.find('.body img').css("height",heightImg*vm.setZoom+'px');
+                initWidth = widthImg*vm.setZoom;
             }
-            $element.find(".body img").off("load");
+            $element.find(".body img").off("load"); 
         };
 
         vm.zoomIn = function(){
@@ -154,20 +159,29 @@
                 if(newWidthImg>widthBody)
                     $element.find('.box-img').scrollLeft((newWidthImg-widthBody)/2);
             }
+            blockZoom=false;
         };
         vm.zoomOut = function(){
-            vm.setZoom-=0.2;
+            if(blockZoom)
+                return;
             var widthImg = $element.find('.body img').width();
             var heightImg = $element.find('.body img').height();
             var widthBody = $element.find('.body').width();
-            if(vm.zoomSupported)
+            var newWidthImg = widthImg-(widthImg*0.2);
+            if(vm.zoomSupported){
+                vm.setZoom-=0.2;
                 $element.find('.body img').css("zoom",vm.setZoom);
+                if(vm.setZoom<initZoom)
+                    blockZoom=true;
+            }
             else{
                 var newWidthImg = widthImg-(widthImg*0.2);
                 $element.find('.body img').css("width",newWidthImg+'px');
                 $element.find('.body img').css("height",heightImg-(heightImg*0.2)+'px');
                 if(newWidthImg>widthBody)
                     $element.find('.box-img').scrollLeft((newWidthImg-widthBody)/2);
+                if(newWidthImg<initWidth)
+                    blockZoom=true;
             }
         };
         vm.safeUrl = function(url){
