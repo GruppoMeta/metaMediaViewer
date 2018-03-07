@@ -42,6 +42,7 @@
         var timestamp = new Date().getTime();
         vm.modalMode = vm.options.modal;
         vm.contentHeight = !vm.modalMode && vm.options.height;
+        vm.hideHeader = vm.options.hideHeader;
         vm.videogular = {};
         vm.videogular.onUpdateTime = function(current,total) {
             vm.videogular.currentTime = current*1000;
