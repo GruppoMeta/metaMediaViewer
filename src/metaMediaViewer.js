@@ -35,7 +35,7 @@
         // inizializzo una variabile che referenzia il modulo
         var vm = this;
         var render = function(){
-            $element.find(".body img").on("load",$scope.setInitZoom);
+            $element.find(".body-module img").on("load",$scope.setInitZoom);
             vm.setMedia(1); 
         };
         vm.zoomSupported = "zoom" in document.body.style;
@@ -92,7 +92,7 @@
                 }
                 else {
                     vm.media.url = vm.media.url.indexOf("?timestamp=" + timestamp) === -1 ? vm.media.url + "?timestamp=" + timestamp : vm.media.url;
-                    //$element.find(".body img").off().on("load",$scope.setInitZoom);
+                    //$element.find(".body-module img").off().on("load",$scope.setInitZoom);
                     vm.loadingImg = true;
                     var img = new Image();
                     img.addEventListener('load', function(){
@@ -117,10 +117,10 @@
         $scope.setInitZoom = function(ev){
             var zoomWidth = null;
             var zoomHeight = null;
-            var widthBody = $element.find('.body').width();
-            var heightBody = $element.find('.body').height();
-            var widthImg = $element.find('.body img').width();
-            var heightImg = $element.find('.body img').height();
+            var widthBody = $element.find('.body-module').width();
+            var heightBody = $element.find('.body-module').height();
+            var widthImg = $element.find('.body-module img').width();
+            var heightImg = $element.find('.body-module img').height();
             if(widthImg>widthBody){
                 zoomWidth = widthBody/widthImg;
             }
@@ -134,29 +134,29 @@
                 vm.setZoom = zoomWidth || zoomHeight || 1;
             }
             if(vm.zoomSupported){
-                $element.find('.body img').css("transform","none");
-                $element.find('.body img').css("zoom",vm.setZoom);
+                $element.find('.body-module img').css("transform","none");
+                $element.find('.body-module img').css("zoom",vm.setZoom);
                 initZoom = vm.setZoom;
             }
             else{
-                $element.find('.body img').css("width",widthImg*vm.setZoom+'px');
-                $element.find('.body img').css("height",heightImg*vm.setZoom+'px');
+                $element.find('.body-module img').css("width",widthImg*vm.setZoom+'px');
+                $element.find('.body-module img').css("height",heightImg*vm.setZoom+'px');
                 initWidth = widthImg*vm.setZoom;
             }
-            $element.find(".body img").off("load"); 
+            $element.find(".body-module img").off("load"); 
         };
 
         vm.zoomIn = function(){
             vm.setZoom+=0.2;
-            var widthImg = $element.find('.body img').width();
-            var heightImg = $element.find('.body img').height();
+            var widthImg = $element.find('.body-module img').width();
+            var heightImg = $element.find('.body-module img').height();
             var widthBody = $element.find('.box-img').width();
             if(vm.zoomSupported)
-                $element.find('.body img').css("zoom",vm.setZoom);
+                $element.find('.body-module img').css("zoom",vm.setZoom);
             else{
                 var newWidthImg = widthImg+(widthImg*0.2);
-                $element.find('.body img').css("width",newWidthImg+'px');
-                $element.find('.body img').css("height",heightImg+(heightImg*0.2)+'px');
+                $element.find('.body-module img').css("width",newWidthImg+'px');
+                $element.find('.body-module img').css("height",heightImg+(heightImg*0.2)+'px');
                 if(newWidthImg>widthBody)
                     $element.find('.box-img').scrollLeft((newWidthImg-widthBody)/2);
             }
@@ -165,20 +165,20 @@
         vm.zoomOut = function(){
             if(blockZoom)
                 return;
-            var widthImg = $element.find('.body img').width();
-            var heightImg = $element.find('.body img').height();
-            var widthBody = $element.find('.body').width();
+            var widthImg = $element.find('.body-module img').width();
+            var heightImg = $element.find('.body-module img').height();
+            var widthBody = $element.find('.body-module').width();
             var newWidthImg = widthImg-(widthImg*0.2);
             if(vm.zoomSupported){
                 vm.setZoom-=0.2;
-                $element.find('.body img').css("zoom",vm.setZoom);
+                $element.find('.body-module img').css("zoom",vm.setZoom);
                 if(vm.setZoom<initZoom)
                     blockZoom=true;
             }
             else{
                 var newWidthImg = widthImg-(widthImg*0.2);
-                $element.find('.body img').css("width",newWidthImg+'px');
-                $element.find('.body img').css("height",heightImg-(heightImg*0.2)+'px');
+                $element.find('.body-module img').css("width",newWidthImg+'px');
+                $element.find('.body-module img').css("height",heightImg-(heightImg*0.2)+'px');
                 if(newWidthImg>widthBody)
                     $element.find('.box-img').scrollLeft((newWidthImg-widthBody)/2);
                 if(newWidthImg<initWidth)

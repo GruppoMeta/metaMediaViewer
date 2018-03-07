@@ -3,7 +3,7 @@
         <div class="box-numNav" ng-if="metaMediaViewer.totalMedias>1">
             <uib-pagination total-items="metaMediaViewer.totalMedias" ng-model="metaMediaViewer.currentMedia" class="pagination-sm" boundary-links="true" first-text="Inizio" rotate="true" force-ellipses="true" last-text="Fine" items-per-page="1" max-size="10" direction-links="false" ></uib-pagination>
         </div>
-        <div class="header" ng-if="!metaMediaViewer.hideHeader">
+        <div class="header-module" ng-if="!metaMediaViewer.hideHeader">
             <div class="box-btnHeader box-btnHeader-left">
                 <a class="btn-grid btnHeader" ng-class="{'active':metaMediaViewer.panelActive}" ng-click="metaMediaViewer.panelActive=metaMediaViewer.toggleEle(metaMediaViewer.panelActive)">
                     <span class="fa fa-th-large"></span>
@@ -45,7 +45,7 @@
         <div class="btn-close-without-header" ng-if="metaMediaViewer.options.btnClose" ng-click="metaMediaViewer.close()">
             <span class="fa fa-times"></span>
         </div>
-        <div class="panel-left" ng-class="{'with-pagination':metaMediaViewer.totalMedias>1}">
+        <div class="panel-left-module" ng-class="{'with-pagination':metaMediaViewer.totalMedias>1}">
             <div class="box-mediaThumb" ng-class="{'active':metaMediaViewer.currentMedia===$index+1}" ng-repeat="media in metaMediaViewer.medias" ng-click="metaMediaViewer.setMedia($index+1)">
                 <div class="img-middle-responsive">
                     <div class="responsive-container" >
@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="body" ng-class="{'panel-active':metaMediaViewer.panelActive, 'with-pagination':metaMediaViewer.totalMedias>1}">
+        <div class="body-module" ng-class="{'panel-active':metaMediaViewer.panelActive, 'with-pagination':metaMediaViewer.totalMedias>1}">
             <div class="box-btnNav box-btnNav-left" ng-if="metaMediaViewer.prev" ng-click="metaMediaViewer.setMedia(false,-1)">
                 <div class="btnNav btnNav-left">
                     <i class="fa fa-arrow-left"></i>
